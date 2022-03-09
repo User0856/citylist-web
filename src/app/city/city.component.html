@@ -1,0 +1,42 @@
+<div class="container">
+  <div class="card">
+    <div class="card-body">
+      <h4 class="card-title">Cities</h4>
+      <table class="table table-stripped">
+          <tbody>
+              <tr *ngFor="let c of cities">>
+                  <td>{{c.id}}</td>
+                  <td>{{c.name}}</td>
+                  <td><img src={{c.imageURI}} class="img-responsive"></td>
+              </tr>
+          </tbody>
+      </table>
+      <hr>
+
+      <nav aria-label="Page navigation example">
+        <ul class="pagination pagination-sm">
+          <li class="page-item">
+            <a class="page-link" href="#" (click) ="setPage(page - 1, $event)">
+              <span aria-hidden="true">&laquo;</span>
+              <span class="sr-only"></span>
+            </a>
+          </li>
+
+        <li class="page-item" *ngFor="let p of this.pages | slice:getStartPage():getEndPage(); let i=index">
+            <a class="page-link" href="#" (click) ="setPage(i + getPage(), $event)" [ngClass]="{'active':page}">{{i + getPage()}}</a>
+        </li>
+
+        <li class="page-item">
+          <a class="page-link" href="#" (click) ="setPage(page + 1, $event)">
+            <span aria-hidden="true">&raquo;</span>
+            <span class="sr-only"></span>
+          </a>
+        </li>
+
+      </ul>
+    </nav>
+
+
+    </div>
+  </div>
+</div>
