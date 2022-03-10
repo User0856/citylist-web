@@ -15,12 +15,9 @@ const config = {
         path: path.resolve(__dirname, 'dist'),
     },
     devServer: {
-        historyApiFallback: true,
+
         proxy: {
-          '/api': {
-            target : "http://localhost:8080",
-            secure: false
-          }
+          '/cities':'http://localhost:8080',
         }
     },
     plugins: [
@@ -47,8 +44,8 @@ const config = {
 module.exports = () => {
     if (isProduction) {
         config.mode = 'production';
-        
-        
+
+
     } else {
         config.mode = 'development';
     }

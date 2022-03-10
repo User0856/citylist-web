@@ -8,7 +8,6 @@ import { CityService } from '../city.service';
 })
 export class CityComponent implements OnInit {
 
-  //public city:any;
   public page:number=0;
   public cities: Array<any> = [];
   public pages: Array<number> = [];
@@ -58,16 +57,49 @@ export class CityComponent implements OnInit {
   getCities(){
     this._cityService.getCities(this.page).subscribe(
       (data:any)=>{
-        console.log(data);
-        this.cities = data.response['content'];
-        console.log(this.cities);
-        this.pages = new Array(data.response['totalPages']);
-        console.log(this.pages);
+        this.cities = data['content'];
+        this.pages = new Array(data['totalPages']);
       },
       (error)=>{
         console.log(error.error.message);
       }
     )
   }
+
+  onClickSubmit(cityName:string) {
+    this._cityService.searchCity(cityName).subscribe(
+      (data:any)=>{
+        this.cities = data['content'];
+        this.pages = new Array(data['totalPages']);
+      },
+      (error)=>{
+        console.log(error.error.message);
+      }
+    )
+ }
+
+ updateCity(cityId:number, name:string, imgURI:string){
+    var data = window.prompt('Enter new city name and image URL separated by ;', name+";"+imgURI)?.split(";");
+    this._cityService.updateCity(cityId, data, this.page).subscribe(
+      (data:any)=>{
+        this._cityService.getCities(this.page).subscribe(
+          (data:any)=>{
+            this.cities = data['content'];
+        this.pages = new Array(data['totalPages']);}
+
+        )
+
+      },
+      (error)=>{
+        console.log(error.error.message);
+      }
+    )
+  }
+
+ handleKeyUp(e: { keyCode: number; }, cityName:string){
+  if(e.keyCode === 13){
+     this.onClickSubmit(cityName);
+  }
+}
 
 }

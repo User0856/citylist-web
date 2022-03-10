@@ -1,42 +1,99 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">Cities</h4>
+      <h4 class="card-title">City List</h4>
       <table class="table table-stripped">
-          <tbody>
-              <tr *ngFor="let c of cities">>
-                  <td>{{c.id}}</td>
-                  <td>{{c.name}}</td>
-                  <td><img src={{c.imageURI}} class="img-responsive"></td>
-              </tr>
-          </tbody>
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">City name</th>
+            <th scope="col">City image</th>
+            <th scope="col">Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let c of cities" scope="row">
+            <td #cityId>{{ c.id }}</td>
+            <td>{{ c.name }}</td>
+            <td style="width:1%"><img src="{{ c.imageURI }}" class="img-responsive"/></td>
+            <td style="text-align: left"><div >
+              <button
+                type="edit info"
+                class="mat-stroked-button"
+                (click)="updateCity(c.id, c.name, c.imageURI)"
+              >
+                Edit info
+              </button>
+            </div></td>
+          </tr>
+        </tbody>
       </table>
-      <hr>
+      <hr />
+      <ng-container *ngIf="this.cities.length == 0">
+        <div class="column col-12 text-center pt-10 pb-10">
+          <div class="h4">No cities found</div>
+        </div>
+      </ng-container>
 
-      <nav aria-label="Page navigation example">
+      <nav aria-label="Page navigation">
         <ul class="pagination pagination-sm">
           <li class="page-item">
-            <a class="page-link" href="#" (click) ="setPage(page - 1, $event)">
+            <a class="page-link" href="#" (click)="setPage(page - 1, $event)">
               <span aria-hidden="true">&laquo;</span>
               <span class="sr-only"></span>
             </a>
+
           </li>
-
-        <li class="page-item" *ngFor="let p of this.pages | slice:getStartPage():getEndPage(); let i=index">
-            <a class="page-link" href="#" (click) ="setPage(i + getPage(), $event)" [ngClass]="{'active':page}">{{i + getPage()}}</a>
-        </li>
-
-        <li class="page-item">
-          <a class="page-link" href="#" (click) ="setPage(page + 1, $event)">
-            <span aria-hidden="true">&raquo;</span>
-            <span class="sr-only"></span>
-          </a>
-        </li>
-
-      </ul>
-    </nav>
-
-
+          <ng-container *ngIf="this.pages.length > 0">
+            <li
+              class="page-item"
+              *ngFor="
+                let p of this.pages | slice: getStartPage():getEndPage(); let i = index">
+              <a #currentPage
+                class="page-link"
+                href="#"
+                (click)="setPage(i + getPage(), $event)"
+                [ngClass]="{ active: page }"
+                >{{ i + getPage() }}</a
+              >
+            </li>
+          </ng-container>
+          <li class="page-item">
+            <a class="page-link" href="#" (click)="setPage(page + 1, $event)">
+              <span aria-hidden="true">&raquo;</span>
+              <span class="sr-only"></span>
+            </a>
+          </li>
+        </ul>
+        <div class="container">
+          <div class="row">
+            <div class="d-flex align-items-center justify-content-end col-md-2">
+              <label for="staticCity2" class="sr-only h3 small"
+                >Search for city:
+              </label>
+            </div>
+            <div class="col-md-3">
+              <input
+                #cityInput
+                type="cityName"
+                class="form-control"
+                id="inputCity"
+                placeholder="Tallinn"
+                (keyup)="handleKeyUp($event, cityInput.value)"
+              />
+            </div>
+            <div class="col-md-4">
+              <button
+                type="submit"
+                class="btn btn-primary mb-2"
+                (click)="onClickSubmit(cityInput.value)"
+              >
+                Search
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
     </div>
   </div>
 </div>
