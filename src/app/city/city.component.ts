@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CityService } from '../city.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-city',
@@ -15,7 +17,7 @@ export class CityComponent implements OnInit {
   collection: any[] = this.pages;
 
 
-  constructor(private _cityService:CityService) { }
+  constructor(private _cityService:CityService, private router: Router) { }
 
   setPage(i:number, event:any){
 
@@ -95,6 +97,14 @@ export class CityComponent implements OnInit {
       }
     )
   }
+
+  getCurrentUser(){
+    return this._cityService.username;
+  }
+
+  logOut() {
+    this.router.navigateByUrl('/login');
+};
 
  handleKeyUp(e: { keyCode: number; }, cityName:string){
   if(e.keyCode === 13){

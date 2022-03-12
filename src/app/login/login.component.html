@@ -1,0 +1,25 @@
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+
+    <form>
+      <h3 id="litheader">City List Login</h3>
+      <div class="inset">
+        <p>
+      <input type="text" name="username" [(ngModel)]="username" id="email" placeholder="username">
+        </p>
+        <p>
+      <input type="password" name="password" [(ngModel)]="password" id="password" placeholder="password">
+    </p>
+    <p>
+      <input type="submit" name="Login" id="go" value="Login" (click)="doLogin()">
+    </p>
+      </div>
+    </form>
+
+  </div>
+</div>

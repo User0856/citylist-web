@@ -1,7 +1,27 @@
 <div class="container">
   <div class="card">
     <div class="card-body">
-      <h4 class="card-title">City List</h4>
+      <div class="container">
+        <div class="row d-flex justify-content-end">
+          <h4 class="card-title">City List</h4>
+          <hr>
+          <div class="d-flex align-items-center justify-content-end col-md-2">
+            <label for="staticCity2" class="sr-only h3 small"
+              >Logged in as: {{this.getCurrentUser()}}
+            </label>
+          </div>
+          <div class="col-md-4">
+            <button
+              type="submit"
+              class="btn btn-primary mb-2"
+              (click)="logOut()"
+            >
+              Logout
+            </button>
+          </div>
+        </div>
+      </div>
+
       <table class="table table-stripped">
         <thead>
           <tr>
