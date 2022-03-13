@@ -2,6 +2,7 @@ version: '3.5'
 
 services:
   angular-service:
+    platform: linux/amd64
     container_name: angular-container
     build: ./
     volumes:
