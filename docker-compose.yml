@@ -1,9 +1,8 @@
 version: '3.5'
 
 services:
-  angular-service:
-    platform: linux/amd64
-    container_name: angular-container
+  citylist-web:
+    container_name: citylist-web2
     build: ./
     volumes:
     - './:/usr/src/app'

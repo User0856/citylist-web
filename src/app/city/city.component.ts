@@ -19,39 +19,6 @@ export class CityComponent implements OnInit {
 
   constructor(private _cityService:CityService, private router: Router) { }
 
-  setPage(i:number, event:any){
-
-    event.preventDefault();
-    this.page = i;
-    this.getCities();
-
-  }
-
-  getStartPage(){
-    if (this.page < 5) {
-      return 0;
-    }
-    else {
-      return this.page - 5;
-    }
-  }
-
-  getEndPage(){
-    if (this.page < this.pages.length - 10) {
-      return this.page + 10;
-    } else {
-      return this.page + 5;
-    }
-  }
-
-  getPage(){
-    if (this.page < 5){
-      return 0;
-    } else {
-      return this.page -5;
-    }
-  }
-
   ngOnInit() {
     this.getCities();
   }
@@ -104,7 +71,38 @@ export class CityComponent implements OnInit {
 
   logOut() {
     this.router.navigateByUrl('/login');
-};
+  };
+
+  setPage(i:number, event:any){
+    event.preventDefault();
+    this.page = i;
+    this.getCities();
+  }
+
+  getStartPage(){
+    if (this.page < 5) {
+      return 0;
+    }
+    else {
+      return this.page - 5;
+    }
+  }
+
+  getEndPage(){
+    if (this.page < this.pages.length - 10) {
+      return this.page + 10;
+    } else {
+      return this.page + 5;
+    }
+  }
+
+  getPage(){
+    if (this.page < 5){
+      return 0;
+    } else {
+      return this.page -5;
+    }
+  }
 
  handleKeyUp(e: { keyCode: number; }, cityName:string){
   if(e.keyCode === 13){

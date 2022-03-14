@@ -24,8 +24,8 @@ export class CityService {
     return this._http.get(this.baseUrl + '/cities/',
     {
       params: {
-        offset: page,
-        pageSize: '10'
+        page: page,
+        size: '10'
       }
     }
       );
